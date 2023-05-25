@@ -1,22 +1,16 @@
-open class Note(
-
+open class Screen(
     private val name: String,
     private val noteContent: String
-
 ) {
     open fun create() {}
-
-    private fun showContent(type: String, archives: List<Note>) {
-
+    private fun showContent(type: String, archives: List<Screen>) {
         println("\nСписок $type:")
         println("0. ${MenuAction.CREATE.value}")
         archives.forEachIndexed { index, note -> println("${index + 1}. ${note.name}") }
         println("${archives.count() + 1}. ${MenuAction.EXIT.value}")
-
     }
 
-    fun start(type: String, archiveList: List<Note>) {
-
+    fun start(type: String, archiveList: List<Screen>) {
         var selectNumber: String
         do {
             showContent(type, archiveList)
@@ -30,15 +24,10 @@ open class Note(
         } while (true)
     }
 
-    private fun showNoteContent(element: Note) {
-
+    private fun showNoteContent(element: Screen) {
         when (element) {
             is Archive -> element.start("заметок", element.noteList)
             else -> println("\n ${element.noteContent}")
         }
-    }
-
-    fun String?.isEmptyOrBlank(): Boolean {
-        return this.isNullOrBlank()
     }
 }
